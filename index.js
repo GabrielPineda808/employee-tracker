@@ -45,5 +45,30 @@ function Start(){
         name: "Update Employee Roles"
       }
     ]
-  });
+  }).then(res => {
+    switch(res.type){
+      case "View All Employees":
+        viewEmployee();
+        break;
+      case "View Departments":
+        viewDepartment();
+        break;
+      case "View Employee Roles":
+        viewRoles();
+        break;
+      case "Add Employee":
+        addEmployee();
+        break;
+      case "Add Department":
+        addDepartment();
+        break;
+      case "Add Employee Role":
+        addRole();
+        break;
+      case "Update Employee Roles":
+        updateRole();
+        break;
+      
+    }
+  })
 }

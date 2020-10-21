@@ -61,13 +61,27 @@ function Start(){
   })
 }
 
+function Quit(){
+  inquirer.prompt({
+    type: "confirm",
+    message: "Would you like to continue?",
+    name: "ans"
+  }).then(res=>{
+    if(res.ans === false){
+      connection.end
+    }else{
+      Quit()
+    }
+  })
+}
+
 function viewEmployee(){
   connection.query(
     "SELECT * FROM employees", 
     function(err, data){
         if(err) throw err;
         console.table(data);
-        Start();
+        Quit();
     }
 )
 };
@@ -78,8 +92,8 @@ function viewDepartment(){
     function(err, data){
         if(err) throw err;
         console.table(data);
-        Start();
-    }
+        Quit();
+    })
 };
 
 function viewRoles(){
@@ -88,8 +102,8 @@ function viewRoles(){
     function(err, data){
         if(err) throw err;
         console.table(data);
-        Start();
-    }
+        Quit();
+    })
 };
 
 function addEmployee(){
@@ -122,7 +136,7 @@ function addEmployee(){
         role_id: res.role,
         manager_id: res.manager
       },
-      Start()
+      Quit()
     )
   })
 };
@@ -140,7 +154,7 @@ function addDepartment(){
         {
             name: res.name,
         },
-        Start()
+        Quit()
     )
   })
 };
@@ -171,7 +185,7 @@ function addRole(){
             salary: res.salary,
             department_id: res.department
         },
-        Start()
+        Quit()
     )
 })
 };

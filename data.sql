@@ -17,5 +17,13 @@ CREATE TABLE department (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE roles (
+    id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255),
+    salary INT NOT NULL,
+    department_id INT NOT NULL,
+    PRIMARY KEY (id)
+)
+
 
 SELECT * FROM employees;

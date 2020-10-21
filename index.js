@@ -63,15 +63,15 @@ function Start(){
 
 function viewEmployee(){
   
-}
+};
 
 function viewDepartment(){
   
-}
+};
 
 function viewRoles(){
   
-}
+};
 
 function addEmployee(){
   inquirer.prompt([{
@@ -106,7 +106,7 @@ function addEmployee(){
       Start()
     )
   })
-}
+};
 
 function addDepartment(){
   inquirer.prompt([
@@ -115,11 +115,11 @@ function addDepartment(){
         message: "Enter Department name: ",
         name: "dep"
     }
-  ]).then(function(input) {
+  ]).then(res => {
     connection.query (
         "INSERT INTO department SET ?",
         {
-            name: input.name,
+            name: res.name,
         },
         Start()
     )
@@ -127,9 +127,36 @@ function addDepartment(){
 };
 
 function addRole(){
-  
-}
+  inquirer.prompt([
+    {
+        type: "input",
+        message: "Enter role name: ",
+        name: "title"
+    },
+    {
+        type: "number",
+        message: "Enter the salary for this role: ",
+        name: "salary"
+    },
+    {
+        type: "number",
+        message: "Enter the department ID for this role: ",
+        name: "department"
+    },
+
+]).then(res=>{
+    connection.query(
+        "INSERT INTO roles SET ?",
+        {
+            title: res.title,
+            salary: res.salary,
+            department_id: res.department
+        },
+        Start()
+    )
+})
+};
 
 function updateRole(){
   
-}
+};

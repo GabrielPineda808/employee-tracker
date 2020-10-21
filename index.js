@@ -74,7 +74,38 @@ function viewRoles(){
 }
 
 function addEmployee(){
-  
+  inquirer.prompt([{
+    type: "input",
+    message: "Enter the First name: ",
+    name: "first"
+  },
+  {
+    type: "input",
+    message: "Enter the last name: ",
+    name: "last"
+  },
+  {
+    type: "input",
+    message: "Enter the Role ID: ",
+    name: "role"
+  },
+  {
+    type: "input",
+    message: "Enter the Manager ID: ",
+    name: "manager"
+  }
+  ]).then(res=>{
+    connection.query(
+      "INSERT INTO employees SET ?",
+      {
+        first_name: res.first,
+        last_name: res.last,
+        role_id: res.role,
+        manager_id: res.manager
+      },
+      Start()
+    )
+  })
 }
 
 function addDepartment(){

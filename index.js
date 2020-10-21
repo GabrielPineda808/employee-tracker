@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+const { on } = require("nodemon");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -11,7 +12,7 @@ var connection = mysql.createConnection({
   password: "password",
   database: "employeeDB"
 });
-
+console.log("hello")
 connection.connect(function(err) {
   if (err) throw err;
   Start();
@@ -23,30 +24,18 @@ function Start(){
     message: "What do you want to do?",
     name: "nextStep",
     choices: [
-      {
-        name: "View All Employees"
-      },
-      {
-        name: "View Departments"
-      },
-      {
-        name: "View Employee Roles"
-      },
-      {
-        name: "Add Employee"
-      },
-      {
-        name: "Add Department"
-      },
-      {
-        name: "Add Employee Role"
-      },
-      {
-        name: "Update Employee Roles"
-      }
-    ]
+      
+        "View All Employees",
+        "View Departments",
+        "View Employee Roles",
+        "Add Employee",
+        "Add Department",
+        "Add Employee Role",
+        "Update Employee Roles"
+    ],
+    name:  "choice"   
   }).then(res => {
-    switch(res.type){
+    switch(res.choice){
       case "View All Employees":
         viewEmployee();
         break;
@@ -68,7 +57,34 @@ function Start(){
       case "Update Employee Roles":
         updateRole();
         break;
-      
     }
   })
+}
+
+function viewEmployee(){
+  
+}
+
+function viewDepartment(){
+  
+}
+
+function viewRoles(){
+  
+}
+
+function addEmployee(){
+  
+}
+
+function addDepartment(){
+  
+}
+
+function addRole(){
+  
+}
+
+function updateRole(){
+  
 }

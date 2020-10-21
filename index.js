@@ -1,6 +1,5 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-const { on } = require("nodemon");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -15,10 +14,10 @@ var connection = mysql.createConnection({
 console.log("hello")
 connection.connect(function(err) {
   if (err) throw err;
-  Start();
+  begin();
 });
 
-function Start(){
+function begin(){
   inquirer.prompt({
     type: "list",
     message: "What do you want to do?",
@@ -61,16 +60,17 @@ function Start(){
   })
 }
 
-function Quit(){
+function Start(){
   inquirer.prompt({
     type: "confirm",
     message: "Would you like to continue?",
     name: "ans"
   }).then(res=>{
-    if(res.ans === false){
-      connection.end
+    if(res.ans === true){
+      begin()
     }else{
-      Quit()
+      
+      connection.end
     }
   })
 }
@@ -81,7 +81,7 @@ function viewEmployee(){
     function(err, data){
         if(err) throw err;
         console.table(data);
-        Quit();
+        Start();
     }
 )
 };
@@ -92,7 +92,7 @@ function viewDepartment(){
     function(err, data){
         if(err) throw err;
         console.table(data);
-        Quit();
+        Start();
     })
 };
 
@@ -102,7 +102,7 @@ function viewRoles(){
     function(err, data){
         if(err) throw err;
         console.table(data);
-        Quit();
+        Start();
     })
 };
 
@@ -136,7 +136,7 @@ function addEmployee(){
         role_id: res.role,
         manager_id: res.manager
       },
-      Quit()
+      Start()
     )
   })
 };
@@ -154,7 +154,7 @@ function addDepartment(){
         {
             name: res.name,
         },
-        Quit()
+        Start()
     )
   })
 };
@@ -175,8 +175,7 @@ function addRole(){
         type: "number",
         message: "Enter the department ID for this role: ",
         name: "department"
-    },
-
+    }
 ]).then(res=>{
     connection.query(
         "INSERT INTO roles SET ?",
@@ -185,7 +184,7 @@ function addRole(){
             salary: res.salary,
             department_id: res.department
         },
-        Quit()
+        Start()
     )
 })
 };

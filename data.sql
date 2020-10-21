@@ -8,7 +8,9 @@ CREATE TABLE employees (
     last_name VARCHAR(45),
     role_id INT NOT NULL,
     manager_id INT NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN  KEY (manager_id) REFERENCES employees(id),
+    FOREIGN  KEY (role_id) REFERENCES role(id)
 );
 
 CREATE TABLE department (
@@ -27,3 +29,8 @@ CREATE TABLE roles (
 
 
 SELECT * FROM employees;
+SELECT * FROM department;
+SELECT * FROM roles;
+
+INSERT INTO employee(first_name, last_name, role_id, manager_id)
+VALUES ("Danny", "Jauregui", 0, 0);

@@ -62,15 +62,34 @@ function Start(){
 }
 
 function viewEmployee(){
-  
+  connection.query(
+    "SELECT * FROM employees", 
+    function(err, data){
+        if(err) throw err;
+        console.table(data);
+        Start();
+    }
+)
 };
 
 function viewDepartment(){
-  
+  connection.query(
+    "SELECT * FROM department", 
+    function(err, data){
+        if(err) throw err;
+        console.table(data);
+        Start();
+    }
 };
 
 function viewRoles(){
-  
+  connection.query(
+    "SELECT * FROM roles", 
+    function(err, data){
+        if(err) throw err;
+        console.table(data);
+        Start();
+    }
 };
 
 function addEmployee(){

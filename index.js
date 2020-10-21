@@ -109,8 +109,22 @@ function addEmployee(){
 }
 
 function addDepartment(){
-  
-}
+  inquirer.prompt([
+    {
+        type: "input",
+        message: "Enter Department name: ",
+        name: "dep"
+    }
+  ]).then(function(input) {
+    connection.query (
+        "INSERT INTO department SET ?",
+        {
+            name: input.name,
+        },
+        Start()
+    )
+  })
+};
 
 function addRole(){
   
